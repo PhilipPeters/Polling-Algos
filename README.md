@@ -24,5 +24,14 @@ Then we can apply Hall's marriage theorem.
 
 Unfortunately, the Hall Marriage condition involves checking 2^m conditions, so there is probably not a better way than the Hungarian Algorithm. Specifically, we apply the Hungarian algorithm to the problem, and if the sum of our best assignment is infinity, there is no perfect matching; otherwise there is.
 
+To implement the Hungarian algorithm in Python (or the Munkres algorithm, as it is called, named after one of the founders), simply open up the terminal, and "pip install munkres".
+
+
+If we want something even shorter than O(m^3), but not quite accurate (i.e. an algorithm that converges to a local minimum, but not necessarily a global minimum), there are many choices. Here is a simple one:
+
+For a random ordering of the students, we can pick, in order, the best slot for each student, unless it doesn't exist, in which case leave it for now, and move on at most log m times (log m can be replaced with any number, but it is to ensure we are not ending up in a scenario where many students have good choices, many have bad, and to avoid situations where we are wasting too much time). If we move to a student who has already been visited, pick the best option available for him/her. This is simply an algorithm to pick a good initial assignment, to hope to come close to a global minimum (no guarantee). Then we now have n students, with n different slots. Then we sweep, in our random order, through each student, and the student after, and consider switching their slots, like a bubble sort, and do this either until it converges, or a fixed number of times, so you can choose your own complexity.
+Of course there is no point Ω(n^2) sweeps, since then our complexity would be O(n^2), and we could just use the Hungarian Algorithm.
+
+
 
 
